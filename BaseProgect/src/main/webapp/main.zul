@@ -1,0 +1,11 @@
+<vbox vflex="1" hflex="1" align="center"
+      pack="start" spacing="20px" >
+
+    <include src="./profile-mvc.zul"/>
+    <include src="./profile-mvvm-property.zul"/>
+<!--    <image src="/img/download.png" />-->
+<!--    <label value="Chapter 3" sclass="head1"/>-->
+    <include src="./todo/todolist-mvc.zul"/>
+    <include src="./todo/todolist-mvvm.zul"/>
+
+</vbox>

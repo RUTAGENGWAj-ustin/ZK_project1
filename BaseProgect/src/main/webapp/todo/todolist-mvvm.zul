@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/todo.css"?>
+<zk>
+    <style>
+
+        button {
+        background: none;
+        }
+        #form2 {
+        border: solid black 1px;
+        }
+        .complete {
+        color: blue;
+        text-decoration: line-through;
+        }
+        #selectedTodoCheck {
+        color: red;
+        background: red;
+        }
+        .z-checkbox {
+        background: red;
+        }
+
+    </style>
+    <window apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('org.example.todo.TodoListViewModel')"
+            border="normal" hflex="1" vflex="max" contentStyle="overflow:auto">
+        <caption src="/img/todo.png" sclass="fn-caption" label="Todo List (MVVM)"/>
+
+        <borderlayout style="height: 500px; " width="900px">
+            <center autoscroll="true" border="none">
+                <vlayout hflex="1" vflex="max">
+                    <hlayout spacing="10px" hflex="1">
+                        <textbox id="todoSubject" value="@bind(vm.title)" placeholder="Enter a new task..." width="300px" />
+                        <button label="Add Task" onClick="@command('addTodo')" width="100px" height="30px"
+                                id="addTodo" />
+                    </hlayout>
+                    <!-- Todo List -->
+                    <listbox model="@bind(vm.todoListModel)" selectedItem="@bind(vm.selectedTodo)" vflex="1">
+                        <listhead>
+                            <listheader width="30px" />
+                            <listheader />
+                            <listheader hflex="min" />
+                        </listhead>
+                        <template name="model">
+                            <listitem sclass="@bind(each.complete?'complete-todo':'')">
+                                <listcell>
+                                    <checkbox checked="@bind(each.complete)"
+                                              onCheck="@command('completeTodo',todo=each)"/>
+                                </listcell>
+                                <listcell>
+                                    <label value="@bind(each.title)"/>
+                                </listcell>
+                                <listcell>
+                                    <button onClick="@command('deleteTodo',todo=each)"
+                                            label="delete" width="36px"/>
+                                </listcell>
+                            </listitem>
+                        </template>
+                    </listbox>
+                </vlayout>
+            </center>
+
+            <east id="selectedTodoBlock" visible="@bind(not empty vm.selectedTodo)"
+                  width="400px" border="none" collapsible="false"
+                  splittable="true" minsize="300" autoscroll="true">
+                <vlayout form="@id('fx') @load(vm.selectedTodo)
+                         @save(vm.selectedTodo, before='updateTodo')">
+                    <hlayout spacing="10px" hflex="1">
+                        <checkbox id="selectedTodoCheck" value="@bind(fx.complete)" />
+                        <textbox id="selectedTodoSubject"  value="@bind(fx.title)" placeholder="Enter a new task..." width="300px" />
+                    </hlayout>
+                    <hlayout id="form2" style="align: space between">
+                        <label value="Priority :" sclass="row-title" />
+                        <radiogroup id="selectedTodoPriority"  model="@bind(vm.priorityList)" selectedItem="@bind(fx.priority)">
+                            <template name="model">
+                                <radio value="@bind(each.label)"  />
+                            </template>
+                        </radiogroup>
+
+
+                    </hlayout>
+                    <hlayout spacing="10px" hflex="1" visible="true" style="align: space between">
+                        <label sclass="row-title" visible="true">date</label>
+                        <datebox id="selectedTodoDate" value="@bind(fx.date)" width="200px"/>
+                    </hlayout>
+                    <hlayout spacing="10px" hflex="1" visible="true">
+                        <label sclass="row-title" visible="true">Description</label>
+                        <textbox id="selectedTodoDescription" value="@bind(fx.description)" multiline="true"
+                                 hflex="1" height="200px" />
+                    </hlayout>
+                    <hlayout>
+                        <button id="update" onClick="@command('updateTodo')" label="Update"/>
+                        <button id="reloadProfile"  onClick="@command('reloadTodo')" label="Reload"/>
+                    </hlayout>
+                    <!-- Detail Editor -->
+                </vlayout>
+
+            </east>
+        </borderlayout>
+    </window>
+</zk>

@@ -1,0 +1,15 @@
+<?link rel="stylesheet" type="text/css" href="/sidebar.css"?>
+<grid id="sidebar"
+      viewModel="@id('vm') @init('org.example.SidebarViewModel')"
+        model="@load(vm.sidebarPages)"
+       hflex="1" vflex="1" sclass="sidebar">
+
+    <rows>
+        <template name="model">
+            <row sclass="sidebar-fn" onClick="@command('navigate',page = each)">
+                <image src="@load(each.pathOfIcon)" style="height: 30px; width: 30px:"/>
+                <label value="@load(each.image)"/>
+            </row>
+        </template>
+    </rows>
+</grid>

@@ -1,0 +1,27 @@
+<?link rel="stylesheet" type="text/css" href="/style.css"?>
+<zk>
+	<custom-attributes org.zkoss.zul.image.preload="true"/>
+	<borderlayout hflex="1" vflex="1">
+		<north vflex="min" border="none"  sclass="banner">
+			<include src="./banner.zul"/>
+		</north>
+
+		<!-- create only when the currentUser is not an anonymous  -->
+<!--		<if test="${not sessionScope.userCredential.anonymous}">-->
+
+			<west width="260px" border="none" collapsible="true" splittable="true" minsize="300" if="${showSidebar}">
+				<include src="./sidebar-mvvm.zul"/>
+			</west>
+<!--		</if>-->
+
+<!--		<west width="260px" border="none" collapsible="true" splittable="true" minsize="300">-->
+<!--			<include src="./sidebar-mvvm.zul"/>-->
+<!--		</west>-->
+		<center id="mainContent" autoscroll="true">
+			<include src="./main.zul"/>
+		</center>
+		<south border="none">
+			<include src="./footer.zul"/>
+		</south>
+	</borderlayout>
+</zk>

@@ -1,0 +1,62 @@
+<?link rel="stylesheet" type="text/css" href="/style.css"?>
+<window
+        viewModel="@id('vm') @init('org.example.profile.ProfileViewModel')"
+        border="normal" hflex="1" vflex="max" contentStyle="overflow:auto">
+    <caption src="/img/profile.jpeg" sclass="fn-caption"
+             label="Profile (MVVM)"/>
+    <vlayout>
+        <grid width="500px"
+              form="@id('fx')@load(vm.currentUser)@save(vm.currentUser, before='save')">
+            <columns>
+                <column align="right" hflex="min"/>
+                <column/>
+            </columns>
+            <rows>
+                <row>
+                    <cell sclass="row-title">Account :</cell>
+                    <cell><label value="@load(fx.account)" /></cell>
+                </row>
+                <row>
+                    <cell sclass="row-title">Full Name :</cell>
+                    <cell>
+                        <textbox id="fullName" value="@bind(fx.fullName)" constraint="no empty: Please enter your full name"
+                                 width="200px"/>
+                    </cell>
+                </row>
+                <row>
+                    <cell sclass="row-title">Email :</cell>
+                    <cell>
+                        <textbox
+                                constraint="/.+@.+\.[a-z]+/: Please enter an e-mail address"
+                                value="@bind(fx.email)"
+                                width="200px"/>
+                    </cell>
+                </row>
+                <row>
+                    <cell sclass="row-title">Birthday :</cell>
+                    <cell><datebox constraint="no future" value="@bind(fx.birthday)" width="200px"/>
+                    </cell>
+                </row>
+                <row>
+                    <cell sclass="row-title">Country :</cell>
+                    <cell>
+                        <listbox  model="@load(vm.countrylist)" selectedItem="@bind(fx.country)" mold="select" width="200px">
+                        </listbox>
+                    </cell>
+                </row>
+                <row>
+                    <cell sclass="row-title">Bio :</cell>
+                    <cell>
+                        <textbox
+                                multiline="true" value="@bind(fx.bio)" hflex="1" height="200px" />
+                    </cell>
+                </row>
+            </rows>
+        </grid>
+        <div>You are editing <label value="@load(vm.currentUser.fullName)"/>'s profile.</div>
+        <hlayout>
+            <button  onClick="@command('save')" label="Save"/>
+            <button onClick="@command('reload')" label="Reload"/>
+        </hlayout>
+    </vlayout>
+</window>

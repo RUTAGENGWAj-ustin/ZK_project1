@@ -1,0 +1,38 @@
+<?link rel="stylesheet" type="text/css" href="/sidebar.css"?>
+<grid id="sidebar"
+        apply="org.example.SidebarChapter2Controller" hflex="1" vflex="1" sclass="sidebar">
+<!--    <zscript><![CDATA[-->
+<!--        //zscript code, it runs on server side, use it for fast prototyping-->
+<!--        java.util.Map sites = new java.util.HashMap();-->
+
+<!--        sites.put("zk","http://www.zkoss.org/");-->
+<!--        sites.put("demo","http://www.zkoss.org/zkdemo");-->
+<!--        sites.put("devref","http://books.zkoss.org/wiki/ZK_Developer's_Reference");-->
+<!--    ]]></zscript>-->
+<!--    <zscript><![CDATA[-->
+<!--        void redirect(String name){-->
+<!--            String loc = sites.get(name);-->
+<!--            if(loc!=null){-->
+<!--                execution.sendRedirect(loc);-->
+<!--            }-->
+<!--        }-->
+<!--    ]]></zscript>-->
+    <columns>
+        <column width="46px" height="40px"/>
+        <column/>
+    </columns>
+    <rows>
+<!--        <row sclass="sidebar-fn" onClick='redirect("zk")'>-->
+<!--            <image src="/img/grobe.jpeg" style="height: 30px; width: 30px:"/> ZK-->
+<!--        </row>-->
+<!--        <row sclass="sidebar-fn" onClick='redirect("demo")'>-->
+<!--            <image src="/img/pc.png" style="height: 30px; width: 30px:"/> ZK Demo-->
+<!--        </row>-->
+<!--        <row sclass="sidebar-fn" onClick='redirect("devref")'>-->
+<!--           <span> <image src="/img/list.png" style="height: 30px; width: 30px:"/></span><span> ZK Developer Reference</span>-->
+<!--        </row>-->
+        <row sclass="sidebar-fn" height="40px">
+            <image sclass="image" /><label sclass="label"/>
+        </row>
+    </rows>
+</grid>

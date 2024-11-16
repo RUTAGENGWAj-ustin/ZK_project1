@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="/todo.css"?>
+<zk>
+    <style>
+
+            button {
+            background: none;
+            }
+            #form2 {
+            border: solid black 1px;
+            }
+            .complete {
+            color: blue;
+            text-decoration: line-through;
+            }
+            #selectedTodoCheck {
+            color: red;
+            background: red;
+            }
+            .z-checkbox {
+            background: red;
+            }
+
+    </style>
+<window apply="org.example.todo.TodoListController"
+        border="normal" hflex="1" vflex="max" contentStyle="overflow:auto">
+    <caption src="/img/todo.png" sclass="fn-caption" label="Todo List (MVC)"/>
+
+    <borderlayout style="height: 500px; " width="900px">
+        <center autoscroll="true" border="none">
+            <vlayout hflex="1" vflex="max">
+                <hlayout spacing="10px" hflex="1">
+                    <textbox id="todoSubject" placeholder="Enter a new task..." width="300px" />
+                    <button label="Add Task" width="100px" height="30px"
+                            id="addTodo" />
+                </hlayout>
+                <!-- Todo List -->
+                <listbox id="todoListbox" vflex="max">
+                    <listhead style="  display: flex; justify-content: space-between;">
+                        <listheader align="right"/>
+                        <listheader align="center"/>
+                        <listheader align="left"/>
+                    </listhead>
+                    <template name="model">
+                        <listitem sclass="${each.complete ? 'complete' : ''}" value="${each}">
+                            <listcell>
+                                <checkbox forward="onCheck=todoListbox.onTodoCheck"
+                                          checked="${each.complete}"  />
+                            </listcell>
+                            <listcell>
+                                <label value="${each.title}" visible="true"/>
+                            </listcell>
+                            <listcell>
+                                <button forward="onClick=todoListbox.onTodoDelete"
+                                      label="Delete"
+                                         height="30px"/>
+<!--                                image="/img/cross.jpeg"-->
+                            </listcell>
+                        </listitem>
+                    </template>
+                </listbox>
+            </vlayout>
+        </center>
+
+        <east id="selectedTodoBlock" visible="true"
+              width="400px" border="none" collapsible="false"
+              splittable="true" minsize="300" autoscroll="true">
+            <vlayout>
+                <hlayout spacing="10px" hflex="1">
+                    <checkbox id="selectedTodoCheck" forward="onCheck=todoListbox.onTodoCheck"
+                              checked="${each.complete}" />
+                    <textbox id="selectedTodoSubject" placeholder="Enter a new task..." width="300px" />
+                </hlayout>
+                <hlayout id="form2" style="align: space between">
+                    <label value="Priority :" sclass="row-title" />
+                    <radiogroup id="selectedTodoPriority">
+                        <template name="model">
+                            <radio label="${each.label}" />
+                        </template>
+                    </radiogroup>
+
+
+                </hlayout>
+                <hlayout spacing="10px" hflex="1" visible="true" style="align: space between">
+                    <label sclass="row-title" visible="true">date</label>
+                    <datebox id="selectedTodoDate" width="200px"/>
+                </hlayout>
+                <hlayout spacing="10px" hflex="1" visible="true">
+                    <label sclass="row-title" visible="true">Description</label>
+                    <textbox id="selectedTodoDescription" multiline="true"
+                             hflex="1" height="200px" />
+                </hlayout>
+                <hlayout>
+                    <button id="update" label="Update"/>
+                    <button id="reloadProfile" label="Reload"/>
+                </hlayout>
+                <!-- Detail Editor -->
+            </vlayout>
+
+        </east>
+    </borderlayout>
+</window>
+</zk>

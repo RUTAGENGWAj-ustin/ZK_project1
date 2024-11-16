@@ -1,0 +1,25 @@
+
+		.banner {
+		background-color:green;
+		color: white;
+		padding: 5px 10px;
+		}
+.sidebar-fn image{
+height: 30px;
+width: 30px;
+}
+.label{
+color : green;
+}
+
+button{
+background: none;
+
+}
+#form2{
+border: solid black 1px;
+}
+.complete-todo{
+color: red;
+tex-decoration: line-through;
+}
